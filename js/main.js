@@ -50,13 +50,21 @@ var GameScene = Class.create(Scene, {
     nguoiChoi = new Fish();
     this.addChild(nguoiChoi);
 
-    var daNhayXong = true;
-
     // Thiet lap logic dua tren su kien (javascript events)
     // * 'enterframe': su kien duoc kich hoat khi vua bat dau khung hinh moi
     // * 'touchstart': khi bam chuot trai tren may tinh
     //                 hoac touch tren smartphone
+    var daNhayXong = true;
+    var canVeOng = true;
     this.addEventListener('enterframe', function() {
+      if (canVeOng) {
+        canVeOng = false;
+        this.veOng();
+        // tl.delay(fr).then(fn): sau khoang thoi gian `fr` thi goi ham fn
+        this.tl.delay(50).then(function(){
+          canVeOng = true;
+        });
+      }
       if (daNhayXong) {
         nguoiChoi.y += 15;
       }
@@ -85,6 +93,17 @@ var GameScene = Class.create(Scene, {
         });
       }
     });
+  },
+  veOng: function(){
+    var ongTren = new Pipe();
+    var ongDuoi = new PipeBottom();
+
+    this.addChild(ongTren);
+    this.addChild(ongDuoi);
+
+    // tl.moveX(x, fr): di chuyen lien tuc x pixels, voi toc do fr tren truc x
+    ongTren.tl.moveX(-100, 80);
+    ongDuoi.tl.moveX(-100, 80);
   }
 });
 
@@ -105,4 +124,36 @@ var Fish = Class.create(Sprite, {
 		this.x = 50;
 		this.y = 100;
 	}
+});
+
+// Dinh nghia ong tren
+var Pipe = Class.create(Sprite, {
+
+  initialize: function() {
+    var game;
+
+    game = Game.instance;
+    Sprite.apply(this, [88, 376]);
+    this.image = game.assets['res/pipe.png'];
+    this.x = 350;
+    this.y = 0;
+
+  }
+
+});
+
+// Dinh nghia ong duoi
+var PipeBottom = Class.create(Sprite, {
+
+  initialize: function() {
+    var game;
+
+    game = Game.instance;
+    Sprite.apply(this, [88, 376]);
+    this.image = game.assets['res/pipe.png'];
+    this.x = 350;
+    this.y = 0;
+    this.scaleY = -1; // dao nguoc cai ong xuong
+  }
+
 });
