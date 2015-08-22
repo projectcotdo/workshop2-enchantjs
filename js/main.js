@@ -54,9 +54,13 @@ var GameScene = Class.create(Scene, {
     // * 'enterframe': su kien duoc kich hoat khi vua bat dau khung hinh moi
     // * 'touchstart': khi bam chuot trai tren may tinh
     //                 hoac touch tren smartphone
+    var gameChuaBatDau = true;
     var daNhayXong = true;
     var canVeOng = true;
     this.addEventListener('enterframe', function() {
+      if (gameChuaBatDau) {
+        return;
+      }
       if (canVeOng) {
         canVeOng = false;
         this.veOng();
@@ -79,6 +83,7 @@ var GameScene = Class.create(Scene, {
     //                                      exec(fn) se goi ham `fn` sau khi ket
     //                                      thuc chuyen dong
     this.addEventListener("touchstart", function() {
+      gameChuaBatDau = false;
       if (daNhayXong == false && nguoiChoi.y > 0) {
         nguoiChoi.tl.moveBy(0, -75, 10).exec(function() {
           daNhayXong = true;
