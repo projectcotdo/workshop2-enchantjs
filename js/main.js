@@ -111,6 +111,14 @@ var GameScene = Class.create(Scene, {
     // tl.moveX(x, fr): di chuyen lien tuc x pixels, voi toc do fr tren truc x
     ongTren.tl.moveX(-100, 80);
     ongDuoi.tl.moveX(-100, 80);
+
+    this.addEventListener('enterframe', function() {
+      // * Sprite.intersect(Sprite): kiem tra xem 2 vat the co dung nhau
+      // * Game.stop(): game over
+      if (ongTren.intersect(nguoiChoi) || ongDuoi.intersect(nguoiChoi)) {
+        game.stop();
+      }
+    });
   }
 });
 
