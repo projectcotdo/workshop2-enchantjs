@@ -1,6 +1,7 @@
 // Khoi dong enchantjs
 enchant();
 
+var nguoiChoi;
 // Doi page load thanh cong
 window.onload = function() {
   // Khoi tao class game 320x568
@@ -24,7 +25,7 @@ window.onload = function() {
     // * pushScene(scene): dua khung hinh vao game
     var scene = new GameScene();
     game.pushScene(scene);
-  }
+  };
 
   game.start();
 };
@@ -40,9 +41,32 @@ var GameScene = Class.create(Scene, {
 
     // Ve nhung hinh anh se xuat hien tren khung canh nay
     // * this: o ngu canh nay chi ve khung canh hien tai
+    // * image: xac dinh dung hinh anh nao
     // * addChild(): them hinh anh nay vao khung canh
     hinhNen = new Sprite(320, 568);
     hinhNen.image = game.assets['res/bg.png'];
     this.addChild(hinhNen);
+
+    nguoiChoi = new Fish();
+    this.addChild(nguoiChoi);
   }
+});
+
+// Dinh nghia con ca
+var Fish = Class.create(Sprite, {
+	initialize: function() {
+		var game;
+
+		game = Game.instance;
+		Sprite.apply(this,[64,36]);
+
+    // Thiet lap thong so hinh anh con ca
+    // * x: dia diem tren truc x ( truc hoanh|ngang) (pixel)
+    // * y: dia diem tren truc y ( truc tung|doc) (pixel)
+    // *** LUU Y: diem xuat phat cua truc toa do o day
+    // ***        la goc trai tren cua trang web
+		this.image = game.assets['res/fish.png'];
+		this.x = 50;
+		this.y = 100;
+	}
 });
