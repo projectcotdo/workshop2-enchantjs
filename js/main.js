@@ -97,9 +97,16 @@ var GameScene = Class.create(Scene, {
   veOng: function(){
     var ongTren = new Pipe();
     var ongDuoi = new PipeBottom();
+    // Thu vien Math: * floor(): lam tron xuong
+    //                * random(): tra ve 1 so trong khoang tu -1 den 1
+    var viTriOngTrucY = Math.floor(Math.random() * 150) + 100;
 
     this.addChild(ongTren);
     this.addChild(ongDuoi);
+
+    // Thay doi vi tri ong
+    ongTren.y = viTriOngTrucY - 375;
+    ongDuoi.y = viTriOngTrucY + 150;
 
     // tl.moveX(x, fr): di chuyen lien tuc x pixels, voi toc do fr tren truc x
     ongTren.tl.moveX(-100, 80);
