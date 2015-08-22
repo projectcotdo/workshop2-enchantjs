@@ -49,6 +49,12 @@ var GameScene = Class.create(Scene, {
 
     nguoiChoi = new Fish();
     this.addChild(nguoiChoi);
+
+    // Thiet lap logic dua tren su kien (javascript events)
+    // * 'enterframe': su kien duoc kich hoat khi vua bat dau khung hinh moi
+    this.addEventListener('enterframe', function() {
+      nguoiChoi.y += 15
+    });
   }
 });
 
