@@ -50,10 +50,40 @@ var GameScene = Class.create(Scene, {
     nguoiChoi = new Fish();
     this.addChild(nguoiChoi);
 
+    var daNhayXong = true;
+
     // Thiet lap logic dua tren su kien (javascript events)
     // * 'enterframe': su kien duoc kich hoat khi vua bat dau khung hinh moi
+    // * 'touchstart': khi bam chuot trai tren may tinh
+    //                 hoac touch tren smartphone
     this.addEventListener('enterframe', function() {
-      nguoiChoi.y += 15
+      if (daNhayXong) {
+        nguoiChoi.y += 15;
+      }
+    });
+
+    // * Sprite.tl.moveBy(x,y,fr).exec(fn): moveBy(x,y,fr) la ham di chuyen hinh
+    //                                      anh,
+    //                                      fr la toc do di chuyen ( o day la so
+    //                                      frame de thuc hien xong hanh dong),
+    //                                      x la di chuyen truc hoanh
+    //                                      y la di chuyen truc tung
+    //                                      exec(fn) se goi ham `fn` sau khi ket
+    //                                      thuc chuyen dong
+    this.addEventListener("touchstart", function() {
+      if (daNhayXong == false && nguoiChoi.y > 0) {
+        nguoiChoi.tl.moveBy(0, -75, 10).exec(function() {
+          daNhayXong = true;
+        });
+      }
+      else if (daNhayXong == true && nguoiChoi.y > 0) {
+        // Dung bat cu chuyen dong nao dang dien ra cua nguoiChoi
+        nguoiChoi.tl.clear();
+        daNhayXong = false;
+        nguoiChoi.tl.moveBy(0, -75, 10).exec(function() {
+          daNhayXong = true;
+        });
+      }
     });
   }
 });
