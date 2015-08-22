@@ -8,4 +8,4 @@ Các bước để tạo game:
 -	Cho con cá rớt xuống.
 -	Tạo hình ống nước.
 -	Cho chương trình liên tục tạo ống nước.
--	Check khi nào đụng ống nước/đụng trần/đụng sàn thì thua.
+-	Check khi nào đụng ống nước/đụng sàn thì thua.
